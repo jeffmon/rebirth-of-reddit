@@ -1,0 +1,74 @@
+h1{
+  text-align: center
+}
+
+
+#mainContainer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  background-image: url("/assets/bg.jpg");
+}
+
+#fastenate{
+  width: 100%;
+  height: 100px;
+  background-color: white;
+}
+
+#header{
+  width: 100%;
+  height: 50px;
+  background-color: #3a3a3c;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.headerLinks{
+  display: inline-block;
+  color:grey;
+  font-family: 'Oswald', sans-serif;
+  font-size: 25px;
+}
+
+
+.images{
+  overflow: auto;
+  margin: auto;
+  overflow: auto;
+  width: 500px;
+  height: 300px;
+  background-color: black;
+}
+
+img{
+  display: block;
+  margin:auto;
+}
+
+.boxes{
+  flex: 0 0 35%;
+  box-sizing: border-box;
+  background-color: white;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 30px 10px 30px 10px;
+  margin: 20px;
+}
+
+.titles{
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+
+
+.posterDate{
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  color: grey;
+
+}
