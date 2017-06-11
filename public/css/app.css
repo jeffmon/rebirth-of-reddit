@@ -26,6 +26,10 @@ h1 {
   font-family: 'Oswald', sans-serif;
   font-size: 25px; }
 
+.headerLinks:hover {
+  cursor: pointer;
+  opacity: 0.75; }
+
 .images {
   overflow: auto;
   margin: auto;

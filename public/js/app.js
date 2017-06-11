@@ -1,17 +1,4 @@
 //https://www.reddit.com/r/futureporn.json
-
-
-
-(function(){
-
-  function getInfo(URL){
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", inputData);
-    oReq.open("GET", URL);
-    oReq.send();
-  }
-
-  function inputData(){
     var fastenate = document.createElement("div");
     fastenate.id = "fastenate";
     mainContainer.appendChild(fastenate);
@@ -25,7 +12,7 @@
     mainContainer.appendChild(header);
     var random = document.createElement("p");
     random.className = "headerLinks";
-    random.id = "random";
+    random.id = "randomButton";
     random.innerHTML = "RANDOM &#149 ";
     header.appendChild(random);
     var myBoards = document.createElement("p");
@@ -39,14 +26,34 @@
     getTheApp.innerHTML = " GET THE APP";
     header.appendChild(getTheApp);
 
+
+(function(){
+
+  function getInfo(URL){
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", inputData);
+    oReq.open("GET", URL);
+    oReq.send();
+  }
+
+  function removeElementsByClass(className){
+    var elements = document.getElementsByClassName(className);
+    while(elements.length > 0){
+       elements[0].parentNode.removeChild(elements[0]);
+    }
+}
+
+  function inputData(){
     var response = JSON.parse(this.responseText);
-    var boxDiv, imgTitle, imgDiv, img, posterDate, date;
-    var newArr = [];
-    for(var i = 0; i < 5; i++){
-      if(response.data.children[i].data.stickied === false){
+   // console.log(response.data.children[5]);
+    removeElementsByClass("boxes");
+    var count = 0;
+    for(var i = 0; count < 4; i++){
+      if(response.data.children[i].data.stickied === false && response.data.children[i].data.preview.images[0].source.url !== false){
         boxDiv = document.createElement("div");
         boxDiv.className = "boxes";
         mainContainer.appendChild(boxDiv);
+        count++;
 
         imgDiv = document.createElement("div");
         imgDiv.className = "images";
@@ -102,9 +109,10 @@
           return years + (years > 1 ? ' years ago' : ' years ago');
         }
 
+
+
         posterDate = document.createElement("div");
         posterDate.className = "posterDate";
-        date = response.data.children[20].data.created_utc;
         posterDate.innerHTML = "By " + response.data.children[i].data.author + " &#149" + " " + timeAgoFromEpochTime(response.data.children[i].data.created_utc) + " &#149 " + response.data.children[i].data.ups + " upvoted";
 
         boxDiv.appendChild(posterDate);
@@ -121,12 +129,10 @@
 
 getInfo("https://www.reddit.com/r/futureporn.json");
 
-var targetRandom = document.getElementById("random");
-console.log(targetRandom);
-function randomButton(){
 
-  random.addEventListener("click", getInfo("https://www.reddit.com/r/random.json"));
-}
+var targetRandom = document.getElementById("randomButton");
+
+targetRandom.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/random.json"));
 
 
 
