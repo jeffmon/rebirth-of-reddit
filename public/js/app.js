@@ -131,12 +131,30 @@ getInfo("https://www.reddit.com/r/futureporn.json");
 
 
 var targetRandom = document.getElementById("randomButton");
+var targetMyBoards = document.getElementById("myBoards");
+var targetGetTheApp = document.getElementById("getTheApp");
 
-targetRandom.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/random.json"));
+targetRandom.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/colorizedhistory.json"));
+targetMyBoards.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/futureporn.json"));
+targetGetTheApp.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/starwars.json"));
 
 
 
 }());
+
+  function getInfo(URL){
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", function(){
+      var response = JSON.parse(this.responseText);
+      console.log(response);
+    });
+    oReq.open("GET", URL);
+    oReq.send();
+  }
+
+  getInfo(
+    "https://www.reddit.com/r/ListOfSubreddits/wiki/listofsubreddits.json");
+
 
 
 
