@@ -27,6 +27,11 @@ h1{
   padding-bottom: 30px;
 }
 
+#subName{
+  color:grey;
+  text-align: center;
+}
+
 .headerLinks{
   display: inline-block;
   color:grey;
@@ -47,6 +52,11 @@ h1{
   width: 500px;
   height: 300px;
   background-color: black;
+}
+
+.images:hover{
+  cursor: pointer;
+  opacity: .90;
 }
 
 img{
@@ -78,10 +88,16 @@ img{
   max-height: 409px;
 }
 
+.boxes:hover{
+}
+
 .titles{
   font-family: 'Oswald', sans-serif;
   font-size: 20px;
   text-align: center;
+  height: 2.6em;
+  line-height: 1.2em;
+  overflow: auto;
 }
 
 

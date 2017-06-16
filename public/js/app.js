@@ -7,6 +7,10 @@ var image1 = document.createElement("img");
 image1.src = "/media/1.png";
 fastenate.appendChild(image1);
 
+var subName = document.createElement("div");
+subName.id = "subName";
+fastenate.appendChild(subName);
+
 var header = document.createElement("div");
 header.id = "header";
 mainContainer.appendChild(header);
@@ -53,11 +57,18 @@ var postCount = 0;
 
   function inputData(){
     var response = JSON.parse(this.responseText);
-   // console.log(response.data.children[5]);
     removeElementsByClass("boxes");
-    console.log(postCount);
+    currentData = this.responseURL;
+    var boxDiv, imgDiv, img, imgTitle, posterDate;
+
+
+    subName.innerHTML = response.data.children[0].data.subreddit_name_prefixed;
+
+
+
     for(var i = 0; i <= postCount; i++){
       if(response.data.children[i].data.stickied === false && response.data.children[i].data.preview.images[0].source.url !== false){
+
         boxDiv = document.createElement("div");
         boxDiv.className = "boxes";
         mainContainer.appendChild(boxDiv);
@@ -131,6 +142,23 @@ var postCount = 0;
 
 getInfo("https://www.reddit.com/r/futureporn.json");
 
+var randomList = ["http://www.reddit.com/r/blackpeopletwitter.json", "http://www.reddit.com/r/comics.json", "http://www.reddit.com/r/thewaywewere.json", "http://www.reddit.com/r/oldschoolcool.json", "http://www.reddit.com/r/pic.json", "http://www.reddit.com/r/pics.json", "http://www.reddit.com/r/earthporn.json", "http://www.reddit.com/r/skyporn.json", "http://www.reddit.com/r/astrophotography.json", "http://www.reddit.com/r/spaceporn.json", "http://www.reddit.com/r/itookapicture.json", "http://www.reddit.com/r/roomporn.json", "http://www.reddit.com/r/100yearsago.json", "http://www.reddit.com/r/foodporn.json", "http://www.reddit.com/r/woahdude.json", "http://www.reddit.com/r/mildlyinteresting.json", "http://www.reddit.com/r/pics.json", "http://www.reddit.com/r/nocontextpics.json", "http://www.reddit.com/r/gamecollecting.json", "http://www.reddit.com/r/tattoos.json", "http://www.reddit.com/r/travel.json"];
+
+
+
+
+var randomIndex = 0;
+var previousIndex = 0;
+
+function randVal(){
+  while(randomIndex === previousIndex){
+    randomIndex = Math.floor(Math.random() * randomList.length) + 1;
+  }
+  previousIndex = randomIndex;
+  return randomList[randomIndex];
+}
+
+var randomSubreddit = randVal();
 
 
 var targetRandom = document.getElementById("randomButton");
@@ -139,12 +167,17 @@ var targetGetTheApp = document.getElementById("getTheApp");
 
 var currentData = "http://www.reddit.com/r/futureporn.json";
 
-targetRandom.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/colorizedhistory.json"));
+targetRandom.addEventListener("click", getInfo.bind(this, randVal()));
+targetRandom.addEventListener("click", function(){
+  removeElementsByClass("boxes");
+  postCount = 4;
+});
+
+
 targetMyBoards.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/futureporn.json"));
 targetMyBoards.addEventListener("click", function(){
   removeElementsByClass("boxes");
   postCount = 4;
-  currentData = "http://www.reddit.com/r/futureporn.json";
 });
 
 
@@ -152,7 +185,6 @@ targetGetTheApp.addEventListener("click", getInfo.bind(this, "http://www.reddit.
 targetGetTheApp.addEventListener("click", function(){
   removeElementsByClass("boxes");
   postCount = 4;
-  currentData = "http://www.reddit.com/r/colorizedhistory.json";
 });
 
 document.addEventListener('scroll', function () {
@@ -169,18 +201,7 @@ document.addEventListener('scroll', function () {
 
 
 
-  function getInfo(URL){
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", function(){
-      var response = JSON.parse(this.responseText);
-      //console.log(response.data.content_md);
-    });
-    oReq.open("GET", URL);
-    oReq.send();
-  }
 
-  getInfo(
-    "https://www.reddit.com/r/ListOfSubreddits/wiki/listofsubreddits.json");
 
 
 
