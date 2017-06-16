@@ -1,35 +1,43 @@
-//https://www.reddit.com/r/futureporn.json
-    var fastenate = document.createElement("div");
-    fastenate.id = "fastenate";
-    mainContainer.appendChild(fastenate);
 
-    var image1 = document.createElement("img");
-    image1.src = "/media/1.png";
-    fastenate.appendChild(image1);
+var fastenate = document.createElement("div");
+fastenate.id = "fastenate";
+mainContainer.appendChild(fastenate);
 
-    var header = document.createElement("div");
-    header.id = "header";
-    mainContainer.appendChild(header);
-    var random = document.createElement("p");
-    random.className = "headerLinks";
-    random.id = "randomButton";
-    random.innerHTML = "RANDOM &#149 ";
-    header.appendChild(random);
-    var myBoards = document.createElement("p");
-    myBoards.className = "headerLinks";
-    myBoards.id = "myBoards";
-    myBoards.innerHTML = "  " + " MY BOARDS &#149";
-    header.appendChild(myBoards);
-    var getTheApp = document.createElement("p");
-    getTheApp.className = "headerLinks";
-    getTheApp.id = "getTheApp";
-    getTheApp.innerHTML = " GET THE APP";
-    header.appendChild(getTheApp);
+var image1 = document.createElement("img");
+image1.src = "/media/1.png";
+fastenate.appendChild(image1);
 
+var header = document.createElement("div");
+header.id = "header";
+mainContainer.appendChild(header);
+var random = document.createElement("p");
+random.className = "headerLinks";
+random.id = "randomButton";
+random.innerHTML = "RANDOM &#149 ";
+header.appendChild(random);
+var myBoards = document.createElement("p");
+myBoards.className = "headerLinks";
+myBoards.id = "myBoards";
+myBoards.innerHTML = "  " + " MY BOARDS &#149";
+header.appendChild(myBoards);
+var getTheApp = document.createElement("p");
+getTheApp.className = "headerLinks";
+getTheApp.id = "getTheApp";
+getTheApp.innerHTML = " GET THE APP";
+header.appendChild(getTheApp);
+/*var lineBreak = document.createElement("br");
+var moreButton = document.createElement("div");
+moreButton.className = "headerLinks";
+moreButton.id = "moreButton";
+moreButton.innerHTML = "More";
+footer.appendChild(moreButton);*/
+
+var postCount = 0;
 
 (function(){
 
   function getInfo(URL){
+    postCount += 4;
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", inputData);
     oReq.open("GET", URL);
@@ -47,13 +55,12 @@
     var response = JSON.parse(this.responseText);
    // console.log(response.data.children[5]);
     removeElementsByClass("boxes");
-    var count = 0;
-    for(var i = 0; count < 4; i++){
+    console.log(postCount);
+    for(var i = 0; i <= postCount; i++){
       if(response.data.children[i].data.stickied === false && response.data.children[i].data.preview.images[0].source.url !== false){
         boxDiv = document.createElement("div");
         boxDiv.className = "boxes";
         mainContainer.appendChild(boxDiv);
-        count++;
 
         imgDiv = document.createElement("div");
         imgDiv.className = "images";
@@ -116,11 +123,6 @@
         posterDate.innerHTML = "By " + response.data.children[i].data.author + " &#149" + " " + timeAgoFromEpochTime(response.data.children[i].data.created_utc) + " &#149 " + response.data.children[i].data.ups + " upvoted";
 
         boxDiv.appendChild(posterDate);
-
-
-
-
-
       }
     }
 
@@ -130,23 +132,48 @@
 getInfo("https://www.reddit.com/r/futureporn.json");
 
 
+
 var targetRandom = document.getElementById("randomButton");
 var targetMyBoards = document.getElementById("myBoards");
 var targetGetTheApp = document.getElementById("getTheApp");
 
+var currentData = "http://www.reddit.com/r/futureporn.json";
+
 targetRandom.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/colorizedhistory.json"));
 targetMyBoards.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/futureporn.json"));
-targetGetTheApp.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/starwars.json"));
+targetMyBoards.addEventListener("click", function(){
+  removeElementsByClass("boxes");
+  postCount = 4;
+  currentData = "http://www.reddit.com/r/futureporn.json";
+});
+
+
+targetGetTheApp.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/colorizedhistory.json"));
+targetGetTheApp.addEventListener("click", function(){
+  removeElementsByClass("boxes");
+  postCount = 4;
+  currentData = "http://www.reddit.com/r/colorizedhistory.json";
+});
+
+document.addEventListener('scroll', function () {
+    if (document.body.scrollHeight ==
+        document.body.scrollTop +
+        window.innerHeight) {
+      getInfo(currentData);
+    }
+});
 
 
 
 }());
 
+
+
   function getInfo(URL){
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", function(){
       var response = JSON.parse(this.responseText);
-      console.log(response);
+      //console.log(response.data.content_md);
     });
     oReq.open("GET", URL);
     oReq.send();

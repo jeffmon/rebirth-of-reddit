@@ -4,11 +4,13 @@ h1{
 
 
 #mainContainer{
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
   background-image: url("/assets/bg.jpg");
+  vertical-align: top;
 }
 
 #fastenate{
@@ -32,6 +34,11 @@ h1{
   font-size: 25px;
 }
 
+.headerLinks:hover{
+  cursor: pointer;
+  opacity: 0.75;
+}
+
 
 .images{
   overflow: auto;
@@ -47,6 +54,17 @@ img{
   margin:auto;
 }
 
+#moreButton{
+  vertical-align: middle;
+}
+
+#footer{
+  height: 50px;
+  background-color: white;
+  text-align: center;
+  background-color: black;
+}
+
 .boxes{
   flex: 0 0 35%;
   box-sizing: border-box;
@@ -57,6 +75,7 @@ img{
   display: flex;
   padding: 30px 10px 30px 10px;
   margin: 20px;
+  max-height: 409px;
 }
 
 .titles{
@@ -64,6 +83,7 @@ img{
   font-size: 20px;
   text-align: center;
 }
+
 
 
 .posterDate{
