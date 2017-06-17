@@ -13,7 +13,8 @@ h1 {
 #fastenate {
   width: 100%;
   height: 100px;
-  background-color: white; }
+  background-color: white;
+  position: relative; }
 
 #header {
   width: 100%;
@@ -26,6 +27,17 @@ h1 {
   color: grey;
   text-align: center; }
 
+#instagram {
+  float: right; }
+
+.socialM {
+  margin-top: 27px;
+  margin-left: 5px;
+  margin-right: 10px; }
+
+.socialM:hover {
+  filter: brightness(129%) sepia(1) hue-rotate(333deg) saturate(246.2%) brightness(92.2%); }
+
 .headerLinks {
   display: inline-block;
   color: grey;
@@ -34,7 +46,7 @@ h1 {
 
 .headerLinks:hover {
   cursor: pointer;
-  opacity: 0.75; }
+  color: #FF7F50; }
 
 .images {
   overflow: auto;
@@ -72,6 +84,9 @@ img {
   padding: 30px 10px 30px 10px;
   margin: 20px;
   max-height: 409px; }
+
+.boxes:hover {
+  outline: #FFA500 solid thick; }
 
 .titles {
   font-family: 'Oswald', sans-serif;

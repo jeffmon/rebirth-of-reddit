@@ -6,7 +6,21 @@
 
   var image1 = document.createElement("img");
   image1.src = "/media/1.png";
+  fastenate.appendChild(image1)
+/*
+  var image1 = document.createElement("img");
+  image1.src = "/assets/logo.svg";
+  image1.id = "image1";
   fastenate.appendChild(image1);
+
+  var image2 = document.createElement("img");
+  image2.src = "/assets/header_bg.svg";
+  image2.id = "image2";
+  fastenate.appendChild(image2);
+*/
+
+
+
 
   var subName = document.createElement("div");
   subName.id = "subName";
@@ -30,6 +44,18 @@
   getTheApp.id = "getTheApp";
   getTheApp.innerHTML = " GET THE APP";
   header.appendChild(getTheApp);
+
+  var instagram = document.createElement("img");
+  instagram.src = "/assets/instagram_grey.svg";
+  instagram.id = "instagram";
+  instagram.className = "socialM";
+  header.appendChild(instagram);
+
+  var facebook = document.createElement("img");
+  facebook.src = "/assets/facebook_grey.svg";
+  facebook.id = "instagram";
+  facebook.className = "socialM";
+  header.appendChild(facebook);
 
   var postCount = 0;
 
@@ -91,10 +117,7 @@
     currentData = this.responseURL;
     var boxDiv, imgDiv, img, imgTitle, posterDate;
 
-
     subName.innerHTML = response.data.children[0].data.subreddit_name_prefixed;
-
-
 
     for(var i = 0; i <= postCount; i++){
       if(response.data.children[i].data.stickied === false && response.data.children[i].data.preview.images[0].source.url !== false){
@@ -152,12 +175,12 @@ var targetGetTheApp = document.getElementById("getTheApp");
 
 var currentData = "http://www.reddit.com/r/futureporn.json";
 
-targetRandom.addEventListener("click", getInfo.bind(this, randVal()));
+targetRandom.addEventListener("click", getInfo.bind(this, randomSubreddit));
 targetRandom.addEventListener("click", function(){
   removeElementsByClass("boxes");
   postCount = 4;
+  randomSubreddit = randVal();
 });
-
 
 targetMyBoards.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/futureporn.json"));
 targetMyBoards.addEventListener("click", function(){

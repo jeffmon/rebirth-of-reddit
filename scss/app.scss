@@ -17,6 +17,7 @@ h1{
   width: 100%;
   height: 100px;
   background-color: white;
+  position: relative;
 }
 
 #header{
@@ -32,6 +33,22 @@ h1{
   text-align: center;
 }
 
+
+
+#instagram{
+  float: right;
+}
+
+.socialM{
+  margin-top: 27px;
+  margin-left:5px;
+  margin-right: 10px;
+}
+
+.socialM:hover{
+  filter: brightness(129%) sepia(1) hue-rotate(333deg) saturate(246.2%) brightness(92.2%);
+}
+
 .headerLinks{
   display: inline-block;
   color:grey;
@@ -41,7 +58,7 @@ h1{
 
 .headerLinks:hover{
   cursor: pointer;
-  opacity: 0.75;
+  color: #FF7F50;
 }
 
 
@@ -89,6 +106,8 @@ img{
 }
 
 .boxes:hover{
+  outline: #FFA500 solid thick;
+
 }
 
 .titles{
