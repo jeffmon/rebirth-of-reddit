@@ -33,7 +33,8 @@ h1 {
 .socialM {
   margin-top: 27px;
   margin-left: 5px;
-  margin-right: 10px; }
+  margin-right: 10px;
+  position: relative; }
 
 .socialM:hover {
   filter: brightness(129%) sepia(1) hue-rotate(333deg) saturate(246.2%) brightness(92.2%); }
@@ -42,7 +43,8 @@ h1 {
   display: inline-block;
   color: grey;
   font-family: 'Oswald', sans-serif;
-  font-size: 25px; }
+  font-size: 25px;
+  margin-left: 10px; }
 
 .headerLinks:hover {
   cursor: pointer;
