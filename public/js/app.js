@@ -1,4 +1,4 @@
-(function(){
+(function() {
 
   var fastenate = document.createElement("div");
   fastenate.id = "fastenate";
@@ -6,21 +6,7 @@
 
   var image1 = document.createElement("img");
   image1.src = "/media/1.png";
-  fastenate.appendChild(image1)
-/*
-  var image1 = document.createElement("img");
-  image1.src = "/assets/logo.svg";
-  image1.id = "image1";
   fastenate.appendChild(image1);
-
-  var image2 = document.createElement("img");
-  image2.src = "/assets/header_bg.svg";
-  image2.id = "image2";
-  fastenate.appendChild(image2);
-*/
-
-
-
 
   var subName = document.createElement("div");
   subName.id = "subName";
@@ -59,7 +45,7 @@
 
   var postCount = 0;
 
-  function getInfo(URL){
+  function getInfo(URL) {
     postCount += 4;
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", inputData);
@@ -67,10 +53,10 @@
     oReq.send();
   }
 
-  function removeElementsByClass(className){
+  function removeElementsByClass(className) {
     var elements = document.getElementsByClassName(className);
-    while(elements.length > 0){
-       elements[0].parentNode.removeChild(elements[0]);
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0]);
     }
   }
 
@@ -111,7 +97,7 @@
     return years + (years > 1 ? ' years ago' : ' years ago');
   }
 
-  function inputData(){
+  function inputData() {
     var response = JSON.parse(this.responseText);
     removeElementsByClass("boxes");
     currentData = this.responseURL;
@@ -119,8 +105,8 @@
 
     subName.innerHTML = response.data.children[0].data.subreddit_name_prefixed;
 
-    for(var i = 0; i <= postCount; i++){
-      if(response.data.children[i].data.stickied === false && response.data.children[i].data.preview.images[0].source.url !== false){
+    for (var i = 0; i <= postCount; i++) {
+      if (response.data.children[i].data.stickied === false && response.data.children[i].data.preview.images[0].source.url !== false) {
 
         boxDiv = document.createElement("div");
         boxDiv.className = "boxes";
@@ -152,65 +138,54 @@
     }
   }
 
-getInfo("https://www.reddit.com/r/futureporn.json");
+  getInfo("https://www.reddit.com/r/futureporn.json");
 
-var randomList = ["http://www.reddit.com/r/blackpeopletwitter.json", "http://www.reddit.com/r/comics.json", "http://www.reddit.com/r/thewaywewere.json", "http://www.reddit.com/r/oldschoolcool.json", "http://www.reddit.com/r/pic.json", "http://www.reddit.com/r/pics.json", "http://www.reddit.com/r/earthporn.json", "http://www.reddit.com/r/skyporn.json", "http://www.reddit.com/r/astrophotography.json", "http://www.reddit.com/r/spaceporn.json", "http://www.reddit.com/r/itookapicture.json", "http://www.reddit.com/r/roomporn.json", "http://www.reddit.com/r/100yearsago.json", "http://www.reddit.com/r/foodporn.json", "http://www.reddit.com/r/woahdude.json", "http://www.reddit.com/r/mildlyinteresting.json", "http://www.reddit.com/r/pics.json", "http://www.reddit.com/r/nocontextpics.json", "http://www.reddit.com/r/gamecollecting.json", "http://www.reddit.com/r/tattoos.json", "http://www.reddit.com/r/travel.json"];
+  var randomList = ["http://www.reddit.com/r/blackpeopletwitter.json", "http://www.reddit.com/r/comics.json", "http://www.reddit.com/r/thewaywewere.json", "http://www.reddit.com/r/oldschoolcool.json", "http://www.reddit.com/r/pic.json", "http://www. reddit.com/r/pics.json", "http://www.reddit.com/r/earthporn.json", "http://www.reddit.com/r/skyporn.json", "http://www.reddit.com/r/astrophotography.json", "http://www.reddit.com/r/spaceporn.json", "http://www.reddit.com/r/itookapicture.json", "http://www.reddit.com/r/roomporn.json", "http://www.reddit.com/r/100yearsago.json", "http://www.reddit.com/r/foodporn.json", "http://www.reddit.com/r/woahdude.json", "http://www.reddit.com/r/mildlyinteresting.json", "http://www.reddit.com/r/pics.json", "http://www.reddit.com/r/nocontextpics.json", "http://www.reddit.com/r/gamecollecting.json", "http://www.reddit.com/r/tattoos.json", "http://www.reddit.com/r/travel.json"];
 
-var randomIndex = 0;
-var previousIndex = 0;
+  var randomIndex = 0;
+  var previousIndex = 0;
 
-function randVal(){
-  while(randomIndex === previousIndex){
-    randomIndex = Math.floor(Math.random() * randomList.length) + 1;
+  function randVal() {
+    while (randomIndex === previousIndex) {
+      randomIndex = Math.floor(Math.random() * randomList.length) + 1;
+    }
+    previousIndex = randomIndex;
+    return randomList[randomIndex];
   }
-  previousIndex = randomIndex;
-  return randomList[randomIndex];
-}
 
-var randomSubreddit = randVal();
+  var randomSubreddit = randVal();
 
-var targetRandom = document.getElementById("randomButton");
-var targetMyBoards = document.getElementById("myBoards");
-var targetGetTheApp = document.getElementById("getTheApp");
+  var targetRandom = document.getElementById("randomButton");
+  var targetMyBoards = document.getElementById("myBoards");
+  var targetGetTheApp = document.getElementById("getTheApp");
 
-var currentData = "http://www.reddit.com/r/futureporn.json";
+  var currentData = "http://www.reddit.com/r/futureporn.json";
 
-targetRandom.addEventListener("click", getInfo.bind(this, randomSubreddit));
-targetRandom.addEventListener("click", function(){
-  removeElementsByClass("boxes");
-  postCount = 4;
-  randomSubreddit = randVal();
-});
+  targetRandom.addEventListener("click", getInfo.bind(this, randomSubreddit));
+  targetRandom.addEventListener("click", function() {
+    removeElementsByClass("boxes");
+    postCount = 4;
+    randomSubreddit = randVal();
+  });
 
-targetMyBoards.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/futureporn.json"));
-targetMyBoards.addEventListener("click", function(){
-  removeElementsByClass("boxes");
-  postCount = 4;
-});
+  targetMyBoards.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/futureporn.json"));
+  targetMyBoards.addEventListener("click", function() {
+    removeElementsByClass("boxes");
+    postCount = 4;
+  });
 
-targetGetTheApp.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/colorizedhistory.json"));
-targetGetTheApp.addEventListener("click", function(){
-  removeElementsByClass("boxes");
-  postCount = 4;
-});
+  targetGetTheApp.addEventListener("click", getInfo.bind(this, "http://www.reddit.com/r/colorizedhistory.json"));
+  targetGetTheApp.addEventListener("click", function() {
+    removeElementsByClass("boxes");
+    postCount = 4;
+  });
 
-document.addEventListener('scroll', function () {
+  document.addEventListener('scroll', function() {
     if (document.body.scrollHeight ==
-        document.body.scrollTop +
-        window.innerHeight) {
+      document.body.scrollTop +
+      window.innerHeight) {
       getInfo(currentData);
     }
-});
+  });
 
 }());
-
-
-
-
-
-
-
-
-
-
-
